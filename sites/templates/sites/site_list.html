@@ -1,21 +1,15 @@
-<!doctype html>
-<html>
-  <head>
-    <title>List Sites</title>
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <h1>Hello</h1>
-    {% if sites %}
-    <ul>
-        {% for site in sites %}
-          <li>{{ site.name }}</li>
-        {% endfor %}
+{% extends "sites/base.html" %}
+
+{% block content %}
+  <h1>Sites</h1>
+  {% if sites %}
+    <ul class="list-group">
+      {% for site in sites %}
+      <li class="list-group-item">{{ site.name }}</li>
+      {% endfor %}
     </ul>
-    {% else %}
-      <p>No sites available</p>
-    {% endif %}
+  {% else %}
+    <p>No sites available</p>
+  {% endif %}
 
-
-  </body>
-</html><html>
+{% endblock %}
