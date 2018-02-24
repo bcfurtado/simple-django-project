@@ -1,0 +1,30 @@
+{% extends "sites/base.html" %}
+
+{% block content %}
+  <h1>Sites Details - {{ site.name }}</h1>
+  {% if site.siteentry_set.all %}
+    <table class="table">
+      <thead>
+        <tr>
+          <td><strong>Date</strong></td>
+          <td><strong>A Value</strong></td>
+          <td><strong>B Value</strong></td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for entry in site.siteentry_set.all  %}
+          <tr>
+            <td>{{ entry.created_at }}</td>
+            <td>{{ entry.value_a }}</td>
+            <td>{{ entry.value_b }}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  {% else %}
+    <p>No sites available</p>
+  {% endif %}
+
+{% endblock %}

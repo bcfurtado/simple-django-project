@@ -11,3 +11,13 @@ class Site(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SiteEntry(models.Model):
+    site = models.ForeignKey(Site, on_delete=models.CASCADE)
+    created_at = models.DateField(auto_now_add=True)
+    value_a = models.DecimalField(max_digits=5, decimal_places=2)
+    value_b = models.DecimalField(max_digits=5, decimal_places=2)
+
+    class Meta:
+        ordering = ['created_at']
