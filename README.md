@@ -22,8 +22,8 @@ make start-with-data
 # Create an admin account:
 make create-account
 # Run the server
-make migate start
-# Login intro Admin:
+make migrate start
+# Login into Admin:
 http://localhost:8000/admin/
 # You'll see the changes at:
 http://localhost:8000/
