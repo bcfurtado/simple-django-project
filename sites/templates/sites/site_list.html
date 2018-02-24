@@ -5,7 +5,8 @@
   {% if sites %}
     <ul class="list-group">
       {% for site in sites %}
-      <li class="list-group-item">{{ site.name }}</li>
+        {% url 'site-detail' site.id as the_url %}
+        <li class="list-group-item"><a href="{{ the_url }}">{{ site.name }}</a></li>
       {% endfor %}
     </ul>
   {% else %}
