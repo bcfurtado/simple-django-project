@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, Avg
 from django.views.generic import ListView, DetailView
 
 from .models import Site
@@ -23,4 +23,16 @@ class SummarySumView(ListView):
         return Site.objects.annotate(
             value_a=Sum('siteentry__value_a'),
             value_b=Sum('siteentry__value_b'),
+        )
+
+
+class SummaryAverageView(ListView):
+    model = Site
+    context_object_name = 'sites'
+    template_name = 'sites/site_summary_average_list.html'
+
+    def get_queryset(self):
+        return Site.objects.annotate(
+            value_a=Avg('siteentry__value_a'),
+            value_b=Avg('siteentry__value_b'),
         )

@@ -45,15 +45,24 @@ class TestSiteDetailView(TestCase):
 
 class TestSummaryView(TestCase):
 
-    def test_it_shows_site_sum_summary_data(self):
+    def setUp(self):
         site = Site.objects.create(name='Demo Site')
         SiteEntry.objects.create(site=site, value_a=12.00, value_b=16.00)
         SiteEntry.objects.create(site=site, value_a=20.00, value_b=100.00)
         SiteEntry.objects.create(site=site, value_a=20.00, value_b=80.00)
 
+    def test_it_shows_site_sum_summary_data(self):
         response = self.client.get('/summary')
 
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Demo Site')
         self.assertContains(response, '52.00')
         self.assertContains(response, '196.00')
+
+    def test_it_shows_site_average_summary_data(self):
+        response = self.client.get('/summary-average')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Demo Site')
+        self.assertContains(response, '17.33')
+        self.assertContains(response, '65.33')
