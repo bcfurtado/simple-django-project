@@ -32,7 +32,18 @@ class SummaryAverageView(ListView):
     template_name = 'sites/site_summary_average_list.html'
 
     def get_queryset(self):
-        return Site.objects.annotate(
-            value_a=Avg('siteentry__value_a'),
-            value_b=Avg('siteentry__value_b'),
-        )
+        sql = '''
+        SELECT
+          sites_site.id,
+          sites_site.name,
+          avg(sites_siteentry.value_a) as value_a,
+          avg(sites_siteentry.value_b) as value_b
+        FROM
+          sites_site
+        LEFT JOIN
+          sites_siteentry ON sites_site.id == sites_siteentry.site_id
+        GROUP BY
+          sites_site.id;
+        '''
+
+        return Site.objects.raw(sql)
