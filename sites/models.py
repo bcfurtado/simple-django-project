@@ -1,10 +1,13 @@
 from django.db import models
 
+from .managers import SiteManager
+
 
 class Site(models.Model):
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = SiteManager()
 
     class Meta:
         ordering = ['name']
