@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.test import TestCase
 
 from ..models import Site, SiteEntry
@@ -43,3 +41,19 @@ class TestSiteDetailView(TestCase):
         response = self.client.get('/sites/{}'.format(site.id))
 
         self.assertContains(response, '12.00', status_code=200)
+
+
+class TestSummaryView(TestCase):
+
+    def test_it_shows_site_sum_summary_data(self):
+        site = Site.objects.create(name='Demo Site')
+        SiteEntry.objects.create(site=site, value_a=12.00, value_b=16.00)
+        SiteEntry.objects.create(site=site, value_a=20.00, value_b=100.00)
+        SiteEntry.objects.create(site=site, value_a=20.00, value_b=80.00)
+
+        response = self.client.get('/summary')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Demo Site')
+        self.assertContains(response, '52.00')
+        self.assertContains(response, '196.00')

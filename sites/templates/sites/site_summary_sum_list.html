@@ -1,0 +1,30 @@
+{% extends "sites/base.html" %}
+
+{% block content %}
+  <h1>Summary</h1>
+  {% if sites %}
+    <table class="table">
+      <thead>
+        <tr>
+          <td><strong>Site</strong></td>
+          <td><strong>A Value</strong></td>
+          <td><strong>B Value</strong></td>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for site in sites %}
+          <tr>
+            <td>{{ site.name }}</td>
+            <td>{{ site.value_a }}</td>
+            <td>{{ site.value_b }}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  {% else %}
+    <p>No sites available</p>
+  {% endif %}
+
+{% endblock %}

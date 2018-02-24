@@ -20,6 +20,5 @@ from sites import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('sites/', include('sites.urls')),
-    path('', views.SitesListView.as_view(), name='index'),
+    path('', include('sites.urls')),
 ]
