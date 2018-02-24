@@ -3,7 +3,7 @@ from django.test import TestCase
 from ..models import Site
 
 
-class TestSitesView(TestCase):
+class TestSiteModel(TestCase):
 
     def test_it_str_returns_the_site_name(self):
         site = Site(name='Demo Site')
